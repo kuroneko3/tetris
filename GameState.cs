@@ -1,0 +1,9 @@
+﻿
+
+public enum GameState {
+	WAIT_START_KEY_INPUT,
+	PLAY_GAME,
+	WAIT_PLAY,
+	GAME_OVER,
+	ENUM_GAME_STATE_END
+};

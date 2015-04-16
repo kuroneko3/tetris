@@ -8,10 +8,10 @@ class mbFadeText : MonoBehaviour
 
 	public bool m_Reverse = false;
 
-	void Start ()
+	void Awake ()
 	{
 		m_text = this.gameObject.guiText;
-
+		
 		StartCoroutine ( fadeText() );
 	}
 

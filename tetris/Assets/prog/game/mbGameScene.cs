@@ -6,6 +6,18 @@ class mbGameScene : mbScene
 	[SerializeField]
 	private GameObject m_PauseObject;
 
+	[SerializeField]
+	private GameObject m_BlockRendererObject;
+
+	cTetrisManager m_tetrisManager = null;
+
+	void Awake ()
+	{
+		cScore.Reset ();
+
+		m_tetrisManager = new cTetrisManager ( m_BlockRendererObject );
+	}
+
 	override protected void start ()
 	{
 	}
@@ -14,34 +26,35 @@ class mbGameScene : mbScene
 	bool m_disableUpdate = false;
 	override protected void update ()
 	{
+
 		if ( m_disableUpdate )
 		{
 			return;
 		}
-
+		
 		if ( Input.GetKeyDown ( KeyCode.Escape ) )
 		{
 			StartCoroutine ( updatePauseCoroutine () );
+			return;
 		}
 
 		if ( checkGameOver() )
 		{
 			StartCoroutine ( updateGameOverCoroutine () );
+			return;
 		}
-
+	
 		updateGame ();
 	}
 
 	void updateGame ()
 	{
-
-
-
+		m_tetrisManager.UpdateGame();
 	}
 
 	bool checkGameOver ()
 	{
-		return false;
+		return m_tetrisManager.CheckGameOver();
 	}
 
 	IEnumerator updateGameOverCoroutine ()

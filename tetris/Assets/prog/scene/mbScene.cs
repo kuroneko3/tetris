@@ -5,6 +5,7 @@ public class mbScene : MonoBehaviour {
 
 	virtual protected void start ()
 	{
+		cScore.Reset ();
 	}
 
 	virtual protected void update ()
@@ -27,11 +28,23 @@ public class mbScene : MonoBehaviour {
 			return;
 		}
 
+		if ( m_nextScene != eScene.NONE )
+		{
+			return;
+		}
+
 		update ();
 	}
 
 	protected void changeScene ( eScene nextScene )
 	{
+		//	文字の明滅をオフに.
+		mbBlinkText []scripts = gameObject.GetComponentsInChildren<mbBlinkText> ();
+		foreach ( mbBlinkText script in scripts )
+		{
+			script.enabled = false;
+		}
+
 		setFadeSprireRenderer ( false );
 
 		m_nextScene = nextScene;
